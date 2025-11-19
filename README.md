@@ -1,7 +1,7 @@
 # BoltLooseningDetection v2.2: Multi-Modal Attention Fusion Framework
 
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C.svg?style=flat-square&logo=pytorch)
-![License](https://imgshields.io/badge/license-GPLv3-blue.svg?style=flat-square)
+![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)
 ![Status](https://img.shields.io/badge/status-Active-success.svg?style=flat-square)
 ![Config](https://img.shields.io/badge/Config-222-brightgreen.svg?style=flat-square)
 
