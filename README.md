@@ -105,4 +105,4 @@ tensorboard --logdir=./logs
 
 ## 📝 License
 
-本项目在GNU GENERAL PUBLIC LICENSE Version 3,许可证下开源。
+本项目在GNU GENERAL PUBLIC LICENSE Version 3 许可证下开源。
