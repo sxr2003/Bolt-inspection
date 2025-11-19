@@ -1,7 +1,7 @@
 # BoltLooseningDetection v2.2: Multi-Modal Attention Fusion Framework
 
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C.svg?style=flat-square&logo=pytorch)
-![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)
+![License](https://imgshields.io/badge/license-GPLv3-blue.svg?style=flat-square)
 ![Status](https://img.shields.io/badge/status-Active-success.svg?style=flat-square)
 ![Config](https://img.shields.io/badge/Config-222-brightgreen.svg?style=flat-square)
 
@@ -80,7 +80,9 @@ The default `config.json` is configured for the **"222"** high-performance mode:
 
 ### 0. Download Dataset (Mandatory)
 
-The dataset is hosted on Kaggle. Use `kagglehub` to download the data to your local machine. The script below will print the path to the downloaded files.
+This project utilizes a **publicly available dataset** hosted on Kaggle, developed by Oybek Eraliev. You can access the dataset directly here: [Vibration Dataset for Bolt Loosening Detection](https://www.kaggle.com/datasets/oybekeraliev/vibration-dataset-for-bolt-loosening-detection?resource=download).
+
+Use `kagglehub` to download the data to your local machine. The script below will automatically download the files and print the path to the downloaded directory.
 
 ```python
 import kagglehub
