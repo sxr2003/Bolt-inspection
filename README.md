@@ -1,51 +1,61 @@
 # BoltLooseningDetection v2.2: Multi-Modal Attention Fusion Framework
 
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C.svg?style=flat-square&logo=pytorch)
-![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)
+![License](https://imgshields.io/badge/license-GPLv3-blue.svg?style=flat-square)
 ![Status](https://img.shields.io/badge/status-Active-success.svg?style=flat-square)
 ![Config](https://img.shields.io/badge/Config-222-brightgreen.svg?style=flat-square)
 
 ## 📖 Project Overview
 
-**BoltLooseningDetection v2.2** 是一个高性能的深度学习框架，专为工业螺栓松动检测设计。它采用先进的 **多模态 "2-2-2" 架构**，结合 1D 振动信号和 2D 时频图像，实现了 16 种不同松动状态的鲁棒分类。
+**BoltLooseningDetection v2.2** is a high-performance deep learning framework designed for industrial bolt loosening detection. It employs an advanced **Multi-Modal "2-2-2" Architecture** that robustly classifies 16 distinct loosening states by fusing 1D vibration signals and their 2D time-frequency image representations.
+
+### 🚀 Core Architecture ("222" Configuration)
+
+The primary experimental setup utilizes the following high-performance components:
+
+* **Image Encoder (Type 2):** **ResNet101** (Pretrained) adapted for 5-channel pseudo-image input.
+* **Signal Encoder (Type 2):** **Hybrid Structure** (1D-CNN + Bi-LSTM + Transformer Encoder) for comprehensive feature extraction (local, temporal, and global).
+* **Fusion Module (Type 2):** **Multi-Head Attention Fusion** for dynamic, weighted interaction between visual and signal features.
+
+---
 
 ## 📂 Directory Structure
 
 ```text
 BoltLooseningDetection/
-├── config.json           # 核心配置 (设置为 "222" 模式)
-├── dataset.py            # 数据加载、5通道图像生成、增强
-├── generalization.py     # 泛化性测试脚本
-├── model.py              # ResNet101, Hybrid Signal Encoder, Attention Fusion
-├── train.py              # 主训练流程
-├── checkpoints/          # 模型权重存储
-├── logs/                 # TensorBoard 日志和混淆矩阵
-└── data/                 # 数据集目录 (Case1 - Case16)
+├── config.json           # Core configuration file (set to "222" mode)
+├── dataset.py            # Data loading, 5-channel image generation, and augmentation
+├── generalization.py     # Evaluation script for generalization/unseen test cases
+├── model.py              # Contains all model components: ResNet101, Hybrid Encoder, Attention Fusion
+├── train.py              # Main training pipeline
+├── checkpoints/          # Model weights storage
+├── logs/                 # TensorBoard logs and Confusion Matrices
+└── data/                 # Dataset directory (Expected location after download)
 ```
 
 ---
 
 ## ⚙️ Environmental Requirements
 
-要确保所有依赖项都正确安装，请运行以下命令：
+To ensure all dependencies are installed correctly, please run the following command:
 
 ```bash
-pip install torch torchvision numpy pandas \\
-            scipy librosa opencv-python scikit-learn \\
-            matplotlib seaborn tqdm tensorboard
+pip install torch torchvision numpy pandas \
+            scipy librosa opencv-python scikit-learn \
+            matplotlib seaborn tqdm tensorboard kagglehub
 ```
 
-> **Note:** `os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'` 已在 `train.py` 中自动设置以确保兼容性。
+> **Note:** `os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'` is automatically set in `train.py` for compatibility.
 
 ---
 
 ## 🔧 Configuration (`config.json`)
 
-默认 `config.json` 设置为 **"222"** 高性能模式：
+The default `config.json` is configured for the **"222"** high-performance mode:
 
 ```json
 "modality": {
-    "pseudo_image_mode": 1,   // 5-channel mode
+    "pseudo_image_mode": 1,   // 5-channel image mode
     "image_model": {
         "type": 2,            // 2 = ResNet101
         "in_channels": 5,
@@ -68,41 +78,54 @@ pip install torch torchvision numpy pandas \\
 
 ## 🚀 Usage
 
+### 0. Download Dataset (Mandatory)
+
+The dataset is hosted on Kaggle. Use `kagglehub` to download the data to your local machine. The script below will print the path to the downloaded files.
+
+```python
+import kagglehub
+# Download the latest version of the dataset
+path = kagglehub.dataset_download("oybekeraliev/vibration-dataset-for-bolt-loosening-detection")
+print("Path to dataset files:", path)
+```
+
+> **Note:** Ensure the downloaded dataset structure matches the expectations of `dataset.py` (i.e., vibration files within the specified directory structure).
+
 ### 1. Training
 
-启动完整的训练流程。脚本会在首次运行时自动计算信号统计数据 (mean/std)。
+Start the full training pipeline. The script automatically calculates signal statistics (mean/std) on the first run.
 
 ```bash
 python train.py
 ```
 
-* **Output:** 最佳模型保存到 `./checkpoints/best_model_*.pth`。
-* **Logging:** 指标 (损失/精度) 记录到 TensorBoard；混淆矩阵保存到 `./logs`。
+* **Output:** The best model checkpoint is saved to `./checkpoints/best_model_*.pth`.
+* **Logging:** Metrics (Loss/Accuracy) are logged to TensorBoard; Confusion Matrix is saved to `./logs`.
 
 ### 2. Generalization Test
 
-在特定的未见案例或完整数据集上评估训练好的模型，以获取详细指标。
+Evaluate the trained model on specific unseen cases or the full dataset for detailed metrics.
 
 ```bash
 python generalization.py
 ```
 
-* **Output:** 详细的分类报告 (精确度、召回率、F1) 和分案例精度。
+* **Output:** Detailed classification report (Precision, Recall, F1-Score) and per-case accuracy.
 
 ---
 
 ## 📊 Visualization
 
-您可以使用 TensorBoard 监控训练进度并查看混淆矩阵：
+You can monitor the training progress and visualize results using TensorBoard:
 
 ```bash
 tensorboard --logdir=./logs
 ```
 
-项目还会在测试后自动在 `./logs` 文件夹中生成 **混淆矩阵热图 (PNG)**。
+The project also automatically generates **Confusion Matrix Heatmaps (PNG)** in the `./logs` folder after testing.
 
 ---
 
 ## 📝 License
 
-本项目在GNU GENERAL PUBLIC LICENSE Version 3 许可证下开源。
+This project is open-sourced under the **GNU General Public License v3.0 (GPLv3)**.
