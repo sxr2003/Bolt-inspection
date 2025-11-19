@@ -1,4 +1,4 @@
-# BoltLooseningDetection v2.2: Multi-Modal Attention Fusion Framework
+# **Cobra-Net**: Multi-Modal Attention Fusion Framework
 
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C.svg?style=flat-square&logo=pytorch)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)
@@ -7,7 +7,7 @@
 
 ## 📖 Project Overview
 
-**BoltLooseningDetection v2.2** is a high-performance deep learning framework designed for industrial bolt loosening detection. It employs an advanced **Multi-Modal "2-2-2" Architecture** that robustly classifies 16 distinct loosening states by fusing 1D vibration signals and their 2D time-frequency image representations.
+**Cobra-Net** is a high-performance deep learning framework designed for industrial bolt loosening detection. It employs an advanced **Multi-Modal "2-2-2" Architecture** that robustly classifies 16 distinct loosening states by fusing 1D vibration signals and their 2D time-frequency image representations.
 
 ### 🚀 Core Architecture ("222" Configuration)
 
@@ -130,4 +130,4 @@ The project also automatically generates **Confusion Matrix Heatmaps (PNG)** in 
 
 ## 📝 License
 
-This project is open-sourced under the **GNU General Public License v3.0 (GPLv3)**.
+This project is open-sourced under the **MIT License**.
